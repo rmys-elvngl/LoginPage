@@ -1,0 +1,34 @@
+<h2 mat-dialog-title>Edit User</h2>
+<mat-dialog-content>
+  <mat-form-field>
+    <label for="name">First Name:</label>
+    <input matInput placeholder="Name" [(ngModel)]="data.user.firstName" />
+  </mat-form-field>
+  <mat-form-field>
+    <label for="name">Last Name:</label>
+    <input matInput placeholder="Name" [(ngModel)]="data.user.lastName" />
+  </mat-form-field>
+  <mat-form-field>
+    <label for="name">Email:</label>
+    <input matInput placeholder="Name" [(ngModel)]="data.user.email" />
+  </mat-form-field>
+  <mat-form-field>
+    <label for="name">Password:</label>
+    <input matInput placeholder="Name" [(ngModel)]="data.user.password" />
+  </mat-form-field>
+  <mat-form-field>
+    <label for="name">Unvan:</label>
+    <input matInput placeholder="Name" [(ngModel)]="data.user.unvan" />
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button
+    mat-button
+    *ngIf="data.user.isAdmin === true"
+    [mat-dialog-close]="data.user"
+    cdkFocusInitial
+  >
+    Save
+  </button>
+  <button mat-button (click)="onCancelClick()">Cancel</button>
+</mat-dialog-actions>

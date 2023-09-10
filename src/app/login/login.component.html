@@ -1,0 +1,171 @@
+<!-- eslint-disable @angular-eslint/template/label-has-associated-control -->
+<div class="login-wrap">
+  <div [formGroup]="loginForm" class="login-html">
+    <div class="foot-lnk">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        color="w"
+        width="96"
+        height="96"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="feather feather-user-plus svg-icon"
+      >
+        <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+        <circle cx="8.5" cy="7" r="4" />
+        <line x1="20" y1="8" x2="20" y2="14" />
+        <line x1="23" y1="11" x2="17" y2="11" />
+      </svg>
+    </div>
+    <br /><br />
+    <hr />
+    <input id="tab-2" type="radio" name="tab" class="sign-up" checked /><label
+      for="tab-2"
+      class="tab"></label>
+    <div class="login-form">
+      <div class="sign-up-htm">
+        <div class="group">
+          <label for="user" class="label">First Name</label>
+          <input formControlName="firstName" matInput type="text" class="input" />
+          <mat-error *ngIf="loginForm.controls['firstName'].hasError('required')"
+            >First Name is required</mat-error
+          >
+        </div>
+        <div class="group">
+          <label for="user" class="label">Last Name</label>
+          <input formControlName="lastName" matInput type="text" class="input" />
+          <mat-error *ngIf="loginForm.controls['lastName'].hasError('required')"
+            >Last Name is required</mat-error
+          >
+        </div>
+        <div class="group">
+          <label for="pass" class="label">Email Address</label>
+          <input formControlName="email" matInput type="text" class="input" />
+          <mat-error *ngIf="loginForm.controls['email'].hasError('required')"
+            >Email is required</mat-error
+          >
+          <mat-error *ngIf="loginForm.controls['email'].hasError('email')">Invalid email</mat-error>
+        </div>
+        <div class="group">
+          <label for="pass" class="label">Password</label>
+          <input
+            formControlName="password"
+            matInput
+            [type]="hide ? 'password' : 'text'"
+            class="input"
+          />
+          <mat-error *ngIf="loginForm.controls['password'].hasError('required')"
+            >Password is required</mat-error
+          >
+          <mat-icon class="icon" (click)="hide = !hide" matSuffix>{{
+            hide ? "visibility_off" : "visibility"
+          }}</mat-icon>
+        </div>
+        <div class="group">
+          <label for="user" class="label">Title</label>
+          <input formControlName="unvan" matInput type="text" class="input" />
+          <mat-error *ngIf="loginForm.controls['unvan'].hasError('required')"
+            >Title is required</mat-error
+          > </div>
+        <div class="grid-container" style="display: flex">
+          <div class="group">
+            <label for="member-type" class="label">Member Type</label>
+            <div class="radio-group">
+              <label>
+                <input
+                  type="checkbox"
+                  name="memberType"
+                  value="option1"
+                  class="round-checkbox"
+                  formControlName="isNormal"
+                  [checked]="
+                    loginForm.controls['isNormal'].value && !loginForm.controls['isAdmin'].value
+                  "
+                  (change)="handleNormalCheckboxChange($event)"
+                />
+                Normal Member
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  name="memberType"
+                  value="option2"
+                  class="round-checkbox"
+                  formControlName="isAdmin"
+                  [checked]="
+                    loginForm.controls['isAdmin'].value && !loginForm.controls['isNormal'].value
+                  "
+                  (change)="handleAdminCheckboxChange($event)"
+                />
+                Admin
+              </label>
+            </div>
+          </div>
+          <div class="group captcha-container">
+            <div style="display: flex; align-items: center; margin-left: 200px">
+              <div>
+                <label class="label" style="color: red">Math CAPTCHA</label>
+                <p style="color: azure">{{ mathQuestion }}</p>
+              </div>
+              <div style="margin-left: 50px">
+                <input
+                  formControlName="mathAnswer"
+                  matInput
+                  type="number"
+                  class="input"
+                  style="width: 160px"
+                />
+                <mat-error *ngIf="captchaError">Invalid answer</mat-error>
+                <p style="color: azure">Remaining attempts: {{ remainingAttempts }}</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- <div class="group captcha-container">
+            <div class="captcha-box">
+              <mat-accordion>
+                  <mat-expansion-panel >
+                      <mat-expansion-panel-header>
+                          <mat-panel-title style="width: 1%;">
+                              Select image for login
+                          </mat-panel-title>
+                      </mat-expansion-panel-header >
+                      <div class="captcha-images image-grid" >
+                          <label *ngFor="let image of captchaImages" class="image-label">
+                              <input type="checkbox" [value]="image.id" formControlName="selectedImages">
+                              <img [src]="image.url" [alt]="image.alt">
+                              <br>
+                          </label>
+                      </div>
+                  </mat-expansion-panel>
+              </mat-accordion>
+              <mat-error *ngIf="isCaptchaInvalid">Invalid CAPTCHA</mat-error>
+          </div>
+          </div> -->
+        </div>
+
+        <hr />
+        <br />
+
+        <!-- <div class="group">
+        <label for="remember" class="label">Beni Hatırla</label>
+        <input type="checkbox" formControlName="rememberMe" class="round-checkbox">
+      </div> -->
+
+        <div class="group">
+          <button (click)="onSubmit()" type="submit" class="button">Submit</button>
+        </div>
+        <br />
+        <div class="group">
+          <input routerLink="/home" type="submit" class="button" value="Go To Home" />
+        </div>
+
+        <br />
+      </div>
+    </div>
+  </div>
+</div>
